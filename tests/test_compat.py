@@ -61,6 +61,9 @@ if PY2:
             eq_(to_unicode(None), u'None')
             eq_(to_unicode(dict(key='value')), u'{\'key\': \'value\'}')
 
+        def test_error(self):
+            unicode("€")
+            unicode("\xc3\xbf")
 else:
     class TestCompatPY3(object):
         def test_to_unicode_string(self):
