@@ -6,7 +6,7 @@ import sys
 from nose.tools import eq_, assert_raises
 
 # Project
-from ddtrace.compat import to_unicode, PY2, reraise
+from ddtrace.compat import to_unicode, PY2, reraise, stringify
 
 
 # Use different test suites for each Python version, this allows us to test the expected
@@ -61,9 +61,12 @@ if PY2:
             eq_(to_unicode(None), u'None')
             eq_(to_unicode(dict(key='value')), u'{\'key\': \'value\'}')
 
-        def test_error(self):
-            unicode("€")
-            unicode("\xc3\xbf")
+        def test_stringify_unicode(self):
+            # ensure stringify can handle decoding unicode values
+            stringify("€")
+            stringify("\xc3\xbf")
+            stringify("好")
+
 else:
     class TestCompatPY3(object):
         def test_to_unicode_string(self):
