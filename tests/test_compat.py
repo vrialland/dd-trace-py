@@ -6,7 +6,7 @@ import sys
 from nose.tools import eq_, assert_raises
 
 # Project
-from ddtrace.compat import to_unicode, PY2, reraise, stringify
+from ddtrace.compat import to_unicode, PY2, reraise
 
 
 # Use different test suites for each Python version, this allows us to test the expected
