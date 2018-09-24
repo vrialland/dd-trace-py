@@ -26,6 +26,7 @@ class TracedCursor(wrapt.ObjectProxy):
         name = pin.app or 'sql'
         self._self_datadog_name = '%s.query' % name
         self._self_last_execute_operation = None
+        # self._self_last_execute_span = None
 
     def _trace_method(self, method, name, resource, extra_tags, *args, **kwargs):
         pin = Pin.get_from(self)
@@ -38,10 +39,18 @@ class TracedCursor(wrapt.ObjectProxy):
             s.set_tags(pin.tags)
             s.set_tags(extra_tags)
 
+            # TMP, we are not doing this like here
+            # s.parent_id = self._self_last_execute_span.span_id if self._self_last_execute_span else None
+            # print("Setting paremt id to: ", s.parent_id)
+            # store_span = kwargs.pop('store_span') if 'store_span' in kwargs.keys() else False
+
             try:
                 return method(*args, **kwargs)
             finally:
                 s.set_metric("db.rowcount", self.rowcount)
+                # if store_span:
+                #     print("Storing the span")
+                #     self._self_last_execute_span = s
 
     def executemany(self, query, *args, **kwargs):
         self._self_last_execute_operation = None

@@ -30,6 +30,7 @@ def patch_db(tracer):
 
     connections.all = all_connections.__get__(connections, type(connections))
 
+
 def unpatch_db():
     for c in connections.all():
         unpatch_conn(c)
@@ -41,6 +42,7 @@ def unpatch_db():
     connections.all = all_connections
     delattr(connections, ALL_CONNS_ATTR)
 
+
 def patch_conn(tracer, conn):
     if hasattr(conn, CURSOR_ATTR):
         return
@@ -51,6 +53,7 @@ def patch_conn(tracer, conn):
         return TracedCursor(tracer, conn, conn._datadog_original_cursor())
 
     conn.cursor = cursor
+
 
 def unpatch_conn(conn):
     cursor = getattr(conn, CURSOR_ATTR, None)
