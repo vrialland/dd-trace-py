@@ -51,13 +51,5 @@ if settings.AUTO_INSTRUMENT:
             patch_cache(tracer)
         except Exception:
             log.exception('error patching Django cache')
-
-    # # Instrument rest_framework app to trace custom exception handling.
-    # if apps.is_installed('rest_framework'):
-    #     try:
-    #         from .restframework import patch_restframework
-    #         patch_restframework(tracer)
-    #     except Exception:
-    #         log.exception('error patching rest_framework app')
 else:
     log.info("Django instrumenting was disabled")
