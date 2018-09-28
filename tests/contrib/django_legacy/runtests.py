@@ -15,4 +15,4 @@ if __name__ == "__main__":
     sys.path.append(project_root)
 
     from django.core.management import execute_from_command_line
-    execute_from_command_line([sys.argv[0], "test", "--testrunner=wtf.DiscoverRunner", app_to_test])
+    execute_from_command_line([sys.argv[0], "test", "--testrunner=runner.DiscoverRunner", app_to_test])

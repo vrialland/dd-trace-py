@@ -170,8 +170,6 @@ class DiscoverRunner(DjangoTestSuiteRunner):
             tests = None
 
             label_as_path = os.path.abspath(label)
-            print('\n\n')
-            print(label_as_path)
 
             # if a module, or "module.ClassName[.method_name]", just run those
             if not os.path.exists(label_as_path):
@@ -206,10 +204,6 @@ class DiscoverRunner(DjangoTestSuiteRunner):
 
             if not (tests and tests.countTestCases()) and is_discoverable(label):
                 # Try discovery if path is a package or directory
-                # print('\n\n')
-                # print(label)
-                # print('\n\n')
-                # assert False
                 tests = self.test_loader.discover(start_dir=label, **kwargs)
 
                 # Make unittest forget the top-level dir it calculated from this
