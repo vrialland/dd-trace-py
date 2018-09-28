@@ -88,8 +88,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
 
-    # 'django_legacy.app',
-    # 'ddtrace.tests.contrib.django_legacy.app',
     'app',
     # tracer app
     'ddtrace.contrib.django.legacy',
