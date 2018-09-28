@@ -4,7 +4,6 @@ configuration if you need to change the default behavior of
 Django during tests
 """
 import os
-import django
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
