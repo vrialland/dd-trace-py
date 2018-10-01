@@ -94,7 +94,7 @@ INSTALLED_APPS = [
 
 DATADOG_TRACE = {
     # tracer with a DummyWriter
-    # 'TRACER': 'tests.contrib.django.utils.tracer',
+    'TRACER': 'tests.contrib.django_legacy.utils.tracer',
     'ENABLED': True,
     'TAGS': {
         'env': 'test',
