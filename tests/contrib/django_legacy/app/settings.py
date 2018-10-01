@@ -92,6 +92,11 @@ INSTALLED_APPS = [
     'ddtrace.contrib.django.legacy',
 ]
 
+# TODO: for some reason this corrects the failing import
+# for tests.contrib.django_legacy.utils.tracer
+import sys
+sys.path.insert(0, os.path.abspath(''))
+
 DATADOG_TRACE = {
     # tracer with a DummyWriter
     'TRACER': 'tests.contrib.django_legacy.utils.tracer',

@@ -175,8 +175,6 @@ class DiscoverRunner(DjangoTestSuiteRunner):
             if not os.path.exists(label_as_path):
                 tests = self.test_loader.loadTestsFromName(label)
             elif os.path.isdir(label_as_path) and not self.top_level:
-                # print('wtf\n')
-                # assert False
                 # Try to be a bit smarter than unittest about finding the
                 # default top-level for a given directory path, to avoid
                 # breaking relative imports. (Unittest's default is to set

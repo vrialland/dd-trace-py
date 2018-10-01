@@ -46,7 +46,7 @@ class DjangoTraceTestCase(TestCase):
         # empty the tracer spans from test operations
         self.tracer.writer.spans = []
         self.tracer.writer.pop_traces()
-        unpatch_db(self.tacer)
+        unpatch_db()
 
 # class override_ddtrace_settings(object):
 #     def __init__(self, *args, **kwargs):
