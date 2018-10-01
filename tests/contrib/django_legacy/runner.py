@@ -246,7 +246,6 @@ class DiscoverRunner(DjangoTestSuiteRunner):
         Returns the number of tests that failed.
         """
         self.setup_test_environment()
-        print(test_labels)
         suite = self.build_suite(test_labels, extra_tests)
         old_config = self.setup_databases()
         result = self.run_suite(suite)

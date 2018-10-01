@@ -69,7 +69,9 @@ class InstrumentationMixin(MiddlewareClass):
 
 class TraceExceptionMiddleware(InstrumentationMixin):
     """
-    Middleware that traces exceptions raised
+    Middleware that traces exceptions raised.
+
+    Returns None to ensure exceptions are re-raised by Django.
     """
     def process_exception(self, request, exception):
         try:

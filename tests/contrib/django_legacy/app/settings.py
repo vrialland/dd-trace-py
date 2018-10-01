@@ -4,6 +4,7 @@ configuration if you need to change the default behavior of
 Django during tests
 """
 import os
+import sys
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,7 +49,7 @@ SECRET_KEY = 'not_very_secret_in_tests'
 USE_I18N = True
 USE_L10N = True
 STATIC_URL = '/static/'
-ROOT_URLCONF = 'tests.contrib.django.app.views'
+ROOT_URLCONF = 'tests.contrib.django_legacy.app.views'
 
 TEMPLATES = [
     {
@@ -68,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,9 +77,8 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-
-    'tests.contrib.django.app.middlewares.CatchExceptionMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    'tests.contrib.django_legacy.app.middlewares.CatchExceptionMiddleware',
 ]
 
 INSTALLED_APPS = [
@@ -94,7 +94,6 @@ INSTALLED_APPS = [
 
 # TODO: for some reason this corrects the failing import
 # for tests.contrib.django_legacy.utils.tracer
-import sys
 sys.path.insert(0, os.path.abspath(''))
 
 DATADOG_TRACE = {
