@@ -37,6 +37,10 @@ def patch_template(tracer):
                 return Template._datadog_original_render(self, context)
             finally:
                 template_name = self.name or getattr(context, 'template_name', None) or 'unknown'
+                # Django >=1.3, <1.7 uses the string '<Unknown Template>' when
+                # none is set
+                if template_name == '<Unknown Template>':
+                    template_name = 'unknown'
                 span.resource = template_name
                 span.set_tag('django.template_name', template_name)
 

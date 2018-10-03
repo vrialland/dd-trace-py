@@ -7,8 +7,8 @@ from django.test import TestCase
 from ddtrace.tracer import Tracer
 from ddtrace.contrib.django.conf import settings
 from ddtrace.contrib.django.db import patch_db, unpatch_db
-# from ddtrace.contrib.django.cache import unpatch_cache
-# from ddtrace.contrib.django.templates import unpatch_template
+from ddtrace.contrib.django.cache import unpatch_cache
+from ddtrace.contrib.django.templates import unpatch_template
 from ddtrace.contrib.django.middleware import remove_exception_middleware, remove_trace_middleware
 from ddtrace.contrib.django.legacy import _ready
 
@@ -49,9 +49,9 @@ class override_ddtrace_settings(object):
         self.items = list(kwargs.items())
 
     def unpatch_all(self):
-        # unpatch_cache()
+        unpatch_cache()
         unpatch_db()
-        # unpatch_template()
+        unpatch_template()
         remove_trace_middleware()
         remove_exception_middleware()
 
