@@ -10,7 +10,6 @@ import logging
 import importlib
 import threading
 
-
 log = logging.getLogger(__name__)
 
 # Default set of modules to automatically patch or not
