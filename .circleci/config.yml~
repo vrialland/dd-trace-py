@@ -787,7 +787,6 @@ workflows:
       - flask
       - gevent
       - httplib
-      - grpc
       - mongoengine
       - mysqlconnector
       - mysqlpython
@@ -828,7 +827,6 @@ workflows:
             - django
             - flask
             - gevent
-            - grpc
             - httplib
             - mongoengine
             - mysqlconnector
