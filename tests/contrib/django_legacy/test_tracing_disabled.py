@@ -4,7 +4,7 @@ from django.test import TestCase
 # project
 from ddtrace.tracer import Tracer
 from ddtrace.contrib.django.conf import settings
-from ddtrace.contrib.django.legacy import patch as _ready
+from ddtrace.contrib.django.legacy import patch
 
 # testing
 from ...test_tracer import DummyWriter
@@ -23,13 +23,13 @@ class DjangoTracingDisabledTest(TestCase):
 
         # Restart app with tracing disabled
         settings.ENABLED = False
-        _ready()
+        patch()
 
     def tearDown(self):
         # Reset the original settings
         settings.ENABLED = self.backupEnabled
         settings.TRACER = self.backupTracer
-        _ready()
+        patch()
 
     def test_no_service_info_is_written(self):
         services = self.tracer.writer.pop_services()

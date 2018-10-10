@@ -5,12 +5,11 @@ from functools import wraps
 from ddtrace.tracer import Tracer
 from ddtrace.contrib.django.conf import settings
 from ddtrace.contrib.django.legacy import patch
-from ddtrace.contrib.django.db import patch_db, unpatch_db
+from ddtrace.contrib.django.db import unpatch_db
 from ddtrace.contrib.django.cache import unpatch_cache
 from ddtrace.contrib.django.legacy.patch import DD_DJANGO_PATCHED_FLAG
 from ddtrace.contrib.django.templates import unpatch_template
 from ddtrace.contrib.django.middleware import remove_exception_middleware, remove_trace_middleware
-from ddtrace.contrib.django.legacy import patch as _ready
 
 # testing
 from ...test_tracer import DummyWriter
@@ -88,14 +87,14 @@ class override_ddtrace_settings(object):
             self.backup[name] = getattr(settings, name)
             setattr(settings, name, value)
         self.unpatch_all()
-        _ready()
+        patch()
 
     def disable(self):
         for name, value in self.items:
             setattr(settings, name, self.backup[name])
         self.unpatch_all()
         remove_exception_middleware()
-        _ready()
+        patch()
 
     def __call__(self, func):
         @wraps(func)
